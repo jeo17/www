@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vulnerable Page</title>
+    <script>
+      // Parse query parameters from the URL
+      function getQueryParams() {
+        const params = {};
+        const queryString = window.location.search.substring(1); // Get the query string
+        const queryArray = queryString.split("&"); // Split by "&"
+
+        queryArray.forEach((query) => {
+          const [key, value] = query.split("=");
+          params[key] = decodeURIComponent(value);
+        });
+
+        return params;
+      }
+
+      // Inject query parameters directly into the page
+      function displayInfo() {
+        const queryParams = getQueryParams();
+        const password = queryParams["password"] || "";
+        const matricule = queryParams["matricule"] || "No matricule provided";
+
+        // Directly inject raw query values into the DOM (vulnerable to XSS)
+        document.getElementById("password").innerHTML = password;
+        document.getElementById("matricule").innerHTML = matricule;
+      }
+    </script>
+  </head>
+  <body onload="displayInfo()">
+    <h1>Vulnerable Page</h1>
+    <p>Password: <span id="password"></span></p>
+    <p>Matricule: <span id="matricule"></span></p>
+  </body>
+</html>

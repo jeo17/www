@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Example</title>
+</head>
+<body>
+    <h1>Welcome to the Vulnerable Form</h1>
+    <form id="vulnerableForm" novalidate>
+        <label for="username">Enter Username:</label>
+        <input type="text" id="username" name="username" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Output:</h2>
+    <div id="output"></div>
+
+    <!-- Button to navigate to the download page -->
+    <button onclick="navigateToDownload()">Go to Download Page</button>
+
+    <script>
+        document.getElementById('vulnerableForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            const username = document.getElementById('username').value;
+
+            // Directly inject raw input into the DOM
+            const outputElement = document.getElementById('output');
+            outputElement.innerHTML = username;
+
+            // Force execution of scripts (dangerous, but for learning purposes)
+            const scriptTags = outputElement.getElementsByTagName('script');
+            for (let script of scriptTags) {
+                eval(script.innerHTML); // Force script execution
+            }
+        });
+
+        function navigateToDownload() {
+            window.location.href = '/tp3/download.html'; // Navigate to the download page
+        }
+        hello
+    </script>
+</body>
+</html>

